@@ -3,7 +3,7 @@ const cheerio = require('cheerio')
 const fs = require('fs');
 const colors = require('colors/safe')
 
-const url = "https://www.foodneasdasdtwork.com/recipes/tyler-florence/mashed-potatoes-recipe-1943035"
+const url = "https://www.geniuskitchen.com/recipe/greek-yogurt-dessert-with-honey-and-strawberries-422389"
 
 function saver(json, name) {
     var jsoned = JSON.stringify(json, null, 4);
@@ -23,7 +23,17 @@ function paradigmShift(url) {
             "site": "foodnetwork",
             "title": ".o-AssetTitle__a-HeadlineText",
             "ingredients": ".o-Ingredients__a-Ingredient"
-        }
+        },
+        {
+            "site": "geniuskitchen",
+            "title": "h1",
+            "ingredients": ".food"
+        },
+        {
+            "site": "epicurious",
+            "title": "h1",
+            "ingredients": ".ingredient"
+        },
     ]};
 
     var currSite = url.split('.').slice(1)[0];
