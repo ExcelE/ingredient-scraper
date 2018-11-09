@@ -2,6 +2,7 @@ const request = require('request-promise')
 const cheerio = require('cheerio')
 const fs = require('fs');
 const colors = require('colors/safe')
+const sanitize = require('sanitize-html')
 
 const url = "https://www.geniuskitchen.com/recipe/greek-yogurt-dessert-with-honey-and-strawberries-422389"
 
@@ -10,6 +11,14 @@ function saver(json, name) {
     fs.writeFile(`${name}.json`, jsoned, 'utf8', (err) => {
         if (err) throw err;
     });
+}
+
+function sanitizer(dirty) {
+    var clean = sanitize(dirty, {
+        allowedTags: [],
+        allowedAttributes: [],
+    });
+    return clean.trim();
 }
 
 function paradigmShift(url) {
@@ -77,7 +86,7 @@ async function scraper(url, fileout = Date.now()) {
         $(checked.ingredients).each(function(i, elem, arr) {
             // Just to make sure that the ingredients are what comes out
             if($(this).text().substring(0,3) !== 'Add') {
-                recipe.ingredients.push($(this).html());
+                recipe.ingredients.push(sanitizer($(this)));
             }
         });
         var name = recipe.recipeName.split(' ').slice(0,2).join('-');
