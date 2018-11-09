@@ -3,12 +3,14 @@ const cheerio = require('cheerio')
 const fs = require('fs');
 const colors = require('colors/safe')
 const sanitize = require('sanitize-html')
+const path = require('path')
 
-const url = "https://www.geniuskitchen.com/recipe/greek-yogurt-dessert-with-honey-and-strawberries-422389"
+const url = "https://cincyshopper.com/copycat-chick-fil-a-sandwich/"
 
 function saver(json, name) {
     var jsoned = JSON.stringify(json, null, 4);
-    fs.writeFile(`${name}.json`, jsoned, 'utf8', (err) => {
+    var filename = path.join(__dirname, `${name}.json`);
+    fs.writeFile(filename, jsoned, 'utf8', (err) => {
         if (err) throw err;
     });
 }
@@ -43,9 +45,15 @@ function paradigmShift(url) {
             "title": "h1",
             "ingredients": ".ingredient"
         },
+        {
+            "site": "cincyshopper",
+            "title": "h2[class=wprm-recipe-name]",
+            "ingredients": ".wprm-recipe-ingredient-name"
+        }
     ]};
 
-    var currSite = url.split('.').slice(1)[0];
+    var domain = new URL(url).hostname;
+    var currSite = domain.split('.').reverse()[1];
     var retJson = {};
     curr.list.forEach(function(i, elem, arr) {
         // Just to make sure that the ingredients are what comes out
@@ -62,6 +70,7 @@ async function scraper(url, fileout = Date.now()) {
     var checked = paradigmShift(url);
     
     if (Object.keys(checked).length === 0 && checked.constructor === Object) {
+        console.log(checked);
         console.error(colors.bgRed("Website currently not supported!"));
         process.exit(-1);
     }
@@ -80,7 +89,7 @@ async function scraper(url, fileout = Date.now()) {
             decodeEntities: false 
         });
 
-        recipe.recipeName = $(checked.title).text();
+        recipe.recipeName = sanitizer($(checked.title).text());
 
         // store into ingredients array
         $(checked.ingredients).each(function(i, elem, arr) {
@@ -89,9 +98,10 @@ async function scraper(url, fileout = Date.now()) {
                 recipe.ingredients.push(sanitizer($(this)));
             }
         });
+
         var name = recipe.recipeName.split(' ').slice(0,2).join('-');
         var timestamp = fileout.toString().slice(-5,-1);
-        saver(recipe, checked.site + '-' +name + '-' + timestamp);
+        saver(recipe, checked.site + '-' + name.toString() + '-' + timestamp);
 
     } catch (err) {
         console.error(err);

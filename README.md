@@ -7,6 +7,7 @@ Supported sites:
 2) FoodNetwork  
 3) Genius Kitchen  
 4) EpiCurious  
+5) CindyShopper  
 
 #### Setting up environment
 1) Install packages and dependencies  
