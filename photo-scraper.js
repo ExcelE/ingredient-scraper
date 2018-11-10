@@ -5,10 +5,11 @@ const fs = require('fs-extra')
 
 let rawData = fs.readFileSync('carsList.json');
 var cars = JSON.parse(rawData);
-
+var currCar = "";
 
 cars.carsList.forEach(element => {
 	searchTitle = element;
+	currCar = dirPlanner(searchTitle);
 	gis(searchTitle, logResults);
 });
 
@@ -49,12 +50,11 @@ function imageDownloader(image) {
 	}
 }
 
-async function logResults(error, results, pathName) {
+async function logResults(error, results) {
 	if (error) {
 	console.log(error);
 	}
 	else {
-		var folderName = dirPlanner(pathName);
 		var urlList = [];
 		results.forEach(function(i, elem) {
 			if(fileFormatChecker(i.url)){
