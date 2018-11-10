@@ -43,12 +43,12 @@ function paradigmShift(url) {
         {
             "site": "epicurious",
             "title": "h1",
-            "ingredients": ".ingredient"
+            "ingredients": ".ingredient",
         },
         {
             "site": "cincyshopper",
             "title": "h2[class=wprm-recipe-name]",
-            "ingredients": ".wprm-recipe-ingredient-name"
+            "ingredients": ".wprm-recipe-ingredient-name",
         }
     ]};
 
