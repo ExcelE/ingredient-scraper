@@ -60,7 +60,7 @@ async function logResults(error, results) {
 			if(fileFormatChecker(i.url)){
 				const options = {
 					url: i.url,
-					dest: __dirname + `/${folderName}/` + i.url.split('/').reverse()[0].trim(),
+					dest: __dirname + `/${currCar}/` + i.url.split('/').reverse()[0].trim(),
 				};
 				urlList.push(options);
 		}})
