@@ -2,14 +2,22 @@ var gis = require('g-i-s');
 var download = require('image-downloader')
 const fs = require('fs-extra')
 
-searchTitle = '2017 Tesla Model X';
 
-gis(searchTitle, logResults);
+let rawData = fs.readFileSync('carsList.json');
+var cars = JSON.parse(rawData);
+
+
+cars.carsList.forEach(element => {
+	searchTitle = element;
+	gis(searchTitle, logResults);
+});
+
+
 
 function dirPlanner(folder) {
 	var newPath = folder.replace(/\s+/g, '-').toLowerCase();
 	try {
-		fs.ensureDir(newPath);
+		fs.ensureDirSync(newPath);
 		console.log('success!');
 	} catch (err) {
 		console.error(err);
@@ -18,7 +26,6 @@ function dirPlanner(folder) {
 	return newPath;
 }
 
-var pathName = dirPlanner(searchTitle);
 
 function fileFormatChecker(filename) {
 	if (filename.split('.').reverse()[0] !== 'jpg'){
@@ -42,21 +49,21 @@ function imageDownloader(image) {
 	}
 }
 
-async function logResults(error, results) {
+async function logResults(error, results, pathName) {
 	if (error) {
 	console.log(error);
 	}
 	else {
+		var folderName = dirPlanner(pathName);
 		var urlList = [];
 		results.forEach(function(i, elem) {
 			if(fileFormatChecker(i.url)){
 				const options = {
 					url: i.url,
-					dest: __dirname + `/${pathName}/` + i.url.split('/').reverse()[0].trim(),
+					dest: __dirname + `/${folderName}/` + i.url.split('/').reverse()[0].trim(),
 				};
 				urlList.push(options);
-		}
-		})
+		}})
 		urlList.forEach(function(i, elem) {
 			imageDownloader(i);
 		})
