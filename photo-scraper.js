@@ -9,7 +9,7 @@ for(let i = 0; i < 5; i++) {
 	searchTitle = cars.carsList[i];
 	console.log(searchTitle);
 	currCar = dirPlanner(searchTitle);
-	gis(searchTitle, (error, results) => logResults(error, results, searchTitle));
+	gis(searchTitle, (error, results) => logResults(error, results, currCar));
 }
 
 // cars.carsList.forEach(element => {
@@ -23,7 +23,7 @@ for(let i = 0; i < 5; i++) {
 function dirPlanner(folder) {
 	var newPath = folder.replace(/\s+/g, '-').toLowerCase();
 	try {
-		fs.ensureDirSync(`./cars/${newPath}`);
+		fs.ensureDir(`./cars/${newPath}`);
 		// console.log('success!');
 	} catch (err) {
 		console.error(err);
@@ -58,7 +58,7 @@ async function logResults(error, results, query) {
 			if(fileFormatChecker(i.url)){
 				const options = {
 					url: i.url,
-					dest: __dirname + `/${currCar}/` + i.url.split('/').reverse()[0].trim(),
+					dest: __dirname + `/cars/${query}/` + i.url.split('/').reverse()[0].trim(),
 				};
 				urlList.push(options);
 		}})
