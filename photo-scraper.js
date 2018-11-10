@@ -3,23 +3,24 @@ var download = require('image-downloader')
 const fs = require('fs-extra')
 
 
-let rawData = fs.readFileSync('carsList.json');
-var cars = JSON.parse(rawData);
-var currCar = "";
+// let rawData = fs.readFileSync('carsList.json');
+// var cars = JSON.parse(rawData);
+// var currCar = "";
 
-cars.carsList.forEach(element => {
-	searchTitle = element;
-	currCar = dirPlanner(searchTitle);
-	gis(searchTitle, logResults);
-});
+// cars.carsList.forEach(element => {
+// 	searchTitle = element;
+// 	currCar = dirPlanner(searchTitle);
+// 	gis(searchTitle, logResults);
+// });
 
+var currCar = dirPlanner("2017 Nissan Armada");
+gis(currCar, logResults);
 
 
 function dirPlanner(folder) {
 	var newPath = folder.replace(/\s+/g, '-').toLowerCase();
 	try {
-		fs.ensureDirSync(newPath);
-		console.log('success!');
+		fs.ensureDir(newPath);
 	} catch (err) {
 		console.error(err);
 		process.exit(-1);
