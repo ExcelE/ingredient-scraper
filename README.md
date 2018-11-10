@@ -30,10 +30,12 @@ Folder Structure:
 >> 0.jpg  
 >> 1.jpg  
 >> ...  
+
 >second-bar  
 >> 0.jpg  
 >> 1.jpg  
 >> ...  
+
 > third-charlie-game  
 >> 0.jpg  
 >> 1.jpg  
