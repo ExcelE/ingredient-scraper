@@ -70,8 +70,7 @@ async function scraper(url, fileout = Date.now()) {
     var checked = paradigmShift(url);
     
     if (Object.keys(checked).length === 0 && checked.constructor === Object) {
-        console.log(checked);
-        console.error("Hi ",colors.bgRed("Website currently not supported!"));
+        console.error(colors.bgRed("Website currently not supported!"));
         process.exit(-1);
     }
 

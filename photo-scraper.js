@@ -1,7 +1,6 @@
-// const gis = require('g-i-s');
+
 const download = require('image-downloader')
 const fs = require('fs-extra')
-// const shuffle = require('shuffle-array')
 const delay = require('delay')
 const rawData = fs.readFileSync('carsBrand-28.json')
 const scraper = require('images-scraper')
@@ -10,8 +9,9 @@ const cars = JSON.parse(rawData);
 const datetime = require('node-datetime');
 const colors = require('colors/safe')
 
-const MAXIMUM_BRANDS = 3
-const MAXIMUM_IMAGES_PER_MODEL = 10
+const MAXIMUM_BRANDS = 10
+const MAXIMUM_IMAGES_PER_MODEL = 100
+const REQUEST_DELAY_IN_MS = 100
 
 function testImage() {
 	imageDownloader({
@@ -30,8 +30,9 @@ function testImage() {
 		const searchTitle = Object.keys(carArray).toString();
 		const currCar = searchTitle.replace(/\s+/g, '-').toLowerCase()
 		await delay(500);
-		testImage();
-		// search(carArray, currCar)
+		// console.log(carArray[searchTitle][0], " => ", pathCleaner(carArray[searchTitle][0]))
+		// testImage();
+		search(carArray, currCar)
 	}
 }) ();
 
@@ -45,7 +46,7 @@ async function imageDownloader(image) {
 			return;
 		}
 		const res = await download.image(image)
-		console.log(currTime(), colors.bgCyan("Downloading!") ,'File saved to', res.filename)
+		console.log(currTime(), colors.bgGreen("Downloaded!") ,'File saved to', res.filename)
 	}
 	catch(err) {
 		console.log(currTime(), colors.bgRed("ERROR!"), 'Image Downloader err', err)
@@ -56,7 +57,14 @@ function currTime() {
 	return datetime.create().format('[H:M:S]');
 }
 
+function pathCleaner(folderName) {
+	if (typeof folderName === 'string') {
+		return folderName.replace(/\s+/g, '-').toLowerCase()
+	}
+}
+
 async function search (query, dirName) {
+	// var key = query;
 	var keywords = query;
 	// Per brand
 	for (var feature in keywords) {
@@ -68,19 +76,19 @@ async function search (query, dirName) {
 		// Per car
 		for(let i = 0; i < modelArray.length; i++) {
 			key = modelArray[i];
-			await delay(500);
+			await delay(REQUEST_DELAY_IN_MS);
 		// }
 		// modelArray.forEach(function (key) {
 			bing.list({ keyword: key, num: MAXIMUM_IMAGES_PER_MODEL, detail: true })
 			.then(res => {
-				delay(500);
+				delay(REQUEST_DELAY_IN_MS);
 				if (res.length === 0) return console.log(currTime(), 'No results for', key)
 				for (const i of res) {
 					delay(500);
 					if (i.format !== 'jpeg') continue
 					imageDownloader({
 						url: i.url,
-						dest: __dirname + `/cars/${dirName}`,
+						dest: __dirname + `/cars/${dirName}/${pathCleaner(key)}`,
 						headers: {
 							// Some sites will refuse to service requests without appropriate headers
 							'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
