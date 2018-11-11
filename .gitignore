@@ -1,5 +1,6 @@
 # Custom
 cat/
+*.zip
 
 # Logs
 logs
