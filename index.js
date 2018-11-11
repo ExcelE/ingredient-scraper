@@ -5,7 +5,7 @@ const colors = require('colors/safe')
 const sanitize = require('sanitize-html')
 const path = require('path')
 
-const url = "https://cincyshopper.com/copycat-chick-fil-a-sandwich/"
+const url = "https://cincyashopper.com/copycat-chick-fil-a-sandwich/"
 
 function saver(json, name) {
     var jsoned = JSON.stringify(json, null, 4);
@@ -71,7 +71,7 @@ async function scraper(url, fileout = Date.now()) {
     
     if (Object.keys(checked).length === 0 && checked.constructor === Object) {
         console.log(checked);
-        console.error(colors.bgRed("Website currently not supported!"));
+        console.error("Hi ",colors.bgRed("Website currently not supported!"));
         process.exit(-1);
     }
 

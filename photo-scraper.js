@@ -1,78 +1,59 @@
-const gis = require('g-i-s');
+// const gis = require('g-i-s');
 const download = require('image-downloader')
 const fs = require('fs-extra')
-const shuffle = require('shuffle-array')
+// const shuffle = require('shuffle-array')
 const delay = require('delay')
-const rawData = fs.readFileSync('carsBrand-28.json');
+const rawData = fs.readFileSync('carsBrand-28.json')
+const scraper = require('images-scraper')
+const bing = new scraper.Bing()
 const cars = JSON.parse(rawData);
+const datetime = require('node-datetime');
+const colors = require('colors/safe')
 
-(async() => {
-	for(let i = 0; i < 1; i++) {
-		var carArray = cars.brands[i];
-		var searchTitle = Object.keys(carArray).toString();
-		await delay(5000);
-		currCar = dirPlanner(searchTitle);
-		search(carArray, currCar)
+const MAXIMUM_BRANDS = 3
+const MAXIMUM_IMAGES_PER_MODEL = 10
+
+function testImage() {
+	imageDownloader({
+		url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg",
+		dest: __dirname,
+		headers: {
+			// Some sites will refuse to service requests without appropriate headers
+			'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+		}
+	})
+}
+
+;(async() => {
+	for (let i = 0; i < MAXIMUM_BRANDS; i++) {
+		const carArray = cars.brands[i];
+		const searchTitle = Object.keys(carArray).toString();
+		const currCar = searchTitle.replace(/\s+/g, '-').toLowerCase()
+		await delay(500);
+		testImage();
+		// search(carArray, currCar)
 	}
 }) ();
 
-
-function dirPlanner(folder) {
-	var newPath = folder.replace(/\s+/g, '-').toLowerCase();
-	// console.log(newPath)
-	try {
-		fs.ensureDirSync(`./cars/${newPath}`);
-		// console.log('success!');
-	} catch (err) {
-		console.error(err);
-		process.exit(-1);
-	}
-	return newPath;
-}
-
-
-function fileFormatChecker(filename) {
-	return filename.split('.').reverse()[0] === 'jpg';
-}
-
-function imageDownloader(image) {
+async function imageDownloader(image) {
 	// Check for file existance
 	try {
-		var exists = fs.statSync(image.dest);
+		if (!fs.existsSync(image.dest)) fs.ensureDirSync(image.dest)
+		var name = image.dest + "/"  + image.url.split('/').reverse()[0]
+		if (fs.existsSync(name)) {
+			console.log(currTime(), colors.bgBlue("File exists!"), "Not downloading..." , image.url.split('/').reverse()[0] ,"");
+			return;
+		}
+		const res = await download.image(image)
+		console.log(currTime(), colors.bgCyan("Downloading!") ,'File saved to', res.filename)
 	}
 	catch(err) {
-		download.image(image)
-		.then(({ filename, image }) => {
-			console.log('File saved to', filename)
-		})
-		.catch((err) => {
-			console.error(err)
-		})
+		console.log(currTime(), colors.bgRed("ERROR!"), 'Image Downloader err', err)
 	}
 }
 
-async function scrapeAndDownload(key, dirName) {
-	gis(key, async (error, results) => {
-		if (error) {
-			console.log(error);
-		} else {
-			if (results.length === 0) {
-				console.log('No search results for', key)
-				return
-			}
-			// Create array of 100 random indexes from results to download images from
-			const indexes = Array.from({ length: 100 }, () => Math.floor(Math.random() * results.length))
-			for (const num of indexes) {
-				const i = results[num]
-				if (!fileFormatChecker(i.url)) continue;
-				await delay(200);
-				imageDownloader({
-					url: i.url,
-					dest: __dirname + `/cars/${dirName}/` + i.url.split('/').reverse()[0].trim(),
-				})
-			}
-		}
-	})
+function currTime() {
+	return datetime.create().format('[H:M:S]');
 }
 
 async function search (query, dirName) {
@@ -81,14 +62,34 @@ async function search (query, dirName) {
 	for (var feature in keywords) {
 		modelArray = keywords[feature];
 		if (!Array.isArray(modelArray)) {
-			 console.log('Array not found for', feature)
+			 console.log(currTime(), 'Array not found for', feature)
 			continue
 		}
 		// Per car
-		for(let i = 0; i < modelArray.length; i++){
+		for(let i = 0; i < modelArray.length; i++) {
+			key = modelArray[i];
 			await delay(500);
-			scrapeAndDownload(modelArray[i], dirName);
+		// }
+		// modelArray.forEach(function (key) {
+			bing.list({ keyword: key, num: MAXIMUM_IMAGES_PER_MODEL, detail: true })
+			.then(res => {
+				delay(500);
+				if (res.length === 0) return console.log(currTime(), 'No results for', key)
+				for (const i of res) {
+					delay(500);
+					if (i.format !== 'jpeg') continue
+					imageDownloader({
+						url: i.url,
+						dest: __dirname + `/cars/${dirName}`,
+						headers: {
+							// Some sites will refuse to service requests without appropriate headers
+							'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+						}
+					})
+				}
+			})
+			.catch(console.log)
 		}
-		
+		// )
 	}
 }
