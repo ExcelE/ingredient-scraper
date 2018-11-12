@@ -22,30 +22,11 @@ Supported sites:
             console.log(resp)
         })
 
+### Options:
+    
+    scraper(url, save, filename)
 
-## Photo-scraper
+```url```: specify the url to be scraped. Must be one of the supported URLs or an error will occur.   
+```save```: if you specify ```save = true``` it will return a json of the scraped file.  
+```filename```: custom filename for scraped json.  
 
-Work in progress.   
-Goal: When supplied with a JSON file with a list of search terms, the script will download images from Google Search and place them in their appropriate folder.  
-
-Example:  
-
-searchTerms = ["first foo", "second bar", "ThiRd ChArLie gaME"]
-
-```node photo-scraper.js```
-
-Folder Structure:
-> first-foo  
->> 0.jpg  
->> 1.jpg  
->> ...  
-
->second-bar  
->> 0.jpg  
->> 1.jpg  
->> ...  
-
-> third-charlie-game  
->> 0.jpg  
->> 1.jpg  
->> ...  
