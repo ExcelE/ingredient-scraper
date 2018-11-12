@@ -12,7 +12,6 @@ Supported sites:
 #### Setting up environment
 1) Install packages and dependencies   
 > ```node install```  
-2) ```node index.js```  
 
 ### Using the package  
 
