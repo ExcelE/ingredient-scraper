@@ -20,6 +20,7 @@ Supported sites:
     scraper(url).then(resp => {
             console.log(resp)
         })
+    // prints the ingredients to your screen
 
 ### Options:
     
@@ -29,3 +30,12 @@ Supported sites:
 ```save```: *optional*, if you specify ```save = true``` it will save a json of the scraped file.  
 ```filename```: *optional*, custom filename for scraped json.  
 
+### More Examples:
+    const scraper = require('./scraper.js').scraper;
+
+    scraper(url, **true**).then(resp => {
+            console.log(resp)
+        })
+    // saves the json on your current directory
+
+    

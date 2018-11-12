@@ -5,7 +5,7 @@ const colors = require('colors/safe')
 const sanitize = require('sanitize-html')
 const path = require('path')
 
-module.exports.scraper = async function(url, save, filename) {
+module.exports = async function(url, save, filename) {
     return await scraper(url, save, filename);
 };
 
@@ -13,7 +13,7 @@ const url = "https://cincyshopper.com/copycat-chick-fil-a-sandwich/"
 
 function saver(json, name) {
     var jsoned = JSON.stringify(json, null, 4);
-    var filename = path.join(__dirname, `${name}.json`);
+    var filename = path.join(process.cwd(), `${name}.json`);
     fs.writeFile(filename, jsoned, 'utf8', (err) => {
         if (err) throw err;
     });

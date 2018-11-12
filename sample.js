@@ -1,4 +1,4 @@
-const scraper = require('./scraper.js').scraper;
+const scraper = require('./scraper.js');
 
 const url = "https://www.allrecipes.com/recipe/268706/cranberry-sweet-potato-casserole/?internalSource=rotd&referringContentType=Homepage&clickId=cardslot%201"
 
