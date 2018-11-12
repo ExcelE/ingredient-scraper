@@ -15,7 +15,7 @@ Supported sites:
 
 ### Using the package  
 
-    const scraper = require('./scraper.js').scraper;
+    const scraper = require('./scraper.js');
 
     scraper(url).then(resp => {
             console.log(resp)
@@ -31,7 +31,7 @@ Supported sites:
 ```filename```: *optional*, custom filename for scraped json.  
 
 ### More Examples:
-    const scraper = require('./scraper.js').scraper;
+    const scraper = require('./scraper.js');
 
     scraper(url, true).then(resp => {
             console.log(resp)
@@ -41,7 +41,7 @@ Supported sites:
 
 Example:
 
-    const scraper = require('./scraper.js').scraper;
+    const scraper = require('./scraper.js');
 
     scraper(url, true, "Caserole-recipe.json").then(resp => {
             console.log(resp)
