@@ -9,11 +9,28 @@ Supported sites:
 4) EpiCurious  
 5) CindyShopper  
 
-#### Setting up environment
+## Setting up environment
 1) Install packages and dependencies   
 > ```node install```  
 
-### Using the package  
+### Importing the Package to Your Project  
+1) Download the ```scraper.js``` and place it somewhere to your projects.  
+2) Install the following dependencies:  
+    
+    cheerio
+    request-promise
+    fs
+    colors/safe
+    sanitize-html
+    path
+
+3) Import to your project:  
+
+    const scraper = require('./path/to/the/scraper.js')
+
+======
+
+## Using the package  
 
     const scraper = require('./scraper.js');
 
