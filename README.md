@@ -10,8 +10,17 @@ Supported sites:
 5) CindyShopper  
 
 #### Setting up environment
-1) Install packages and dependencies  
-2) ```node index.js```
+1) Install packages and dependencies   
+> ```node install```  
+2) ```node index.js```  
+
+### Using the package  
+
+    const scraper = require('./scraper.js').scraper;
+
+    scraper(url).then(resp => {
+            console.log(resp)
+        })
 
 
 ## Photo-scraper
