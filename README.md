@@ -9,6 +9,8 @@ Supported sites:
 4) EpiCurious  
 5) CindyShopper  
 
+==============================
+
 ## Setting up environment
 1) Install packages and dependencies   
 > ```node install```  
@@ -28,7 +30,7 @@ Supported sites:
 
     const scraper = require('./path/to/the/scraper.js')
 
-======
+==============================
 
 ## Using the package  
 
