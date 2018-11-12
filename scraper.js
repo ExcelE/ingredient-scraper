@@ -5,6 +5,10 @@ const colors = require('colors/safe')
 const sanitize = require('sanitize-html')
 const path = require('path')
 
+module.exports.scraper = async function(url, save, filename) {
+    return await scraper(url, save, filename);
+};
+
 const url = "https://cincyshopper.com/copycat-chick-fil-a-sandwich/"
 
 function saver(json, name) {
@@ -65,8 +69,7 @@ function paradigmShift(url) {
     return retJson;
 }
 
-async function scraper(url, fileout = Date.now()) {
-
+async function scraper(url, save = false, fileout = Date.now()) {
     var checked = paradigmShift(url);
     
     if (Object.keys(checked).length === 0 && checked.constructor === Object) {
@@ -98,14 +101,18 @@ async function scraper(url, fileout = Date.now()) {
                 recipe.ingredients.push(sanitizer($(this)));
             }
         });
-
         var name = recipe.recipeName.split(' ').slice(0,2).join('-');
         var timestamp = fileout.toString().slice(-5,-1);
-        saver(recipe, checked.site + '-' + name.toString() + '-' + timestamp);
+
+        if(save === true) saver(recipe, checked.site + '-' + name.toString() + '-' + timestamp);
+        
+        return new Promise((resolve, reject) => {
+            resolve(recipe)
+        });
 
     } catch (err) {
         console.error(err);
     }    
+
 }
 
-scraper(url);
