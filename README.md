@@ -26,6 +26,6 @@ Supported sites:
     scraper(url, save, filename)
 
 ```url```: specify the url to be scraped. Must be one of the supported URLs or an error will occur.   
-```save```: optional, if you specify ```save = true``` it will return a json of the scraped file.  
+```save```: optional, if you specify ```save = true``` it will save a json of the scraped file.  
 ```filename```: optional, custom filename for scraped json.  
 
