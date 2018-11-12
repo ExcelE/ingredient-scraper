@@ -33,9 +33,20 @@ Supported sites:
 ### More Examples:
     const scraper = require('./scraper.js').scraper;
 
-    scraper(url, **true**).then(resp => {
+    scraper(url, true).then(resp => {
             console.log(resp)
         })
-    // saves the json on your current directory
+    // saves the json on your current directory as
+    // allRecipe-Caserole-2831.json
+
+Example:
+
+    const scraper = require('./scraper.js').scraper;
+
+    scraper(url, true, "Caserole-recipe.json").then(resp => {
+            console.log(resp)
+        })
+    // saves the json on your current directory as
+    // Caserole-recipe.json
 
     
