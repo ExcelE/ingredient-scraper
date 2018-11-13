@@ -1,0 +1,27 @@
+[
+    {
+        "site": "allrecipes",
+        "title": "h1[itemprop=name]",
+        "ingredients": ".recipe-ingred_txt.added"
+    },
+    {
+        "site": "foodnetwork",
+        "title": ".o-AssetTitle__a-HeadlineText",
+        "ingredients": ".o-Ingredients__a-Ingredient"
+    },
+    {
+        "site": "geniuskitchen",
+        "title": "h1",
+        "ingredients": ".food"
+    },
+    {
+        "site": "epicurious",
+        "title": "h1",
+        "ingredients": ".ingredient"
+    },
+    {
+        "site": "cincyshopper",
+        "title": "h2[class=wprm-recipe-name]",
+        "ingredients": ".wprm-recipe-ingredient-name"
+    }
+]

@@ -16,7 +16,7 @@ Supported sites:
 > ```node install```  
 
 ### Importing the Package to Your Project  
-1) Download the ```scraper.js``` and place it somewhere to your projects.  
+1) Download the ```scraper``` folder and place it somewhere to your projects.  
 2) Install the following dependencies:  
     
     cheerio
@@ -28,16 +28,18 @@ Supported sites:
 
 3) Import to your project:  
 
-    const scraper = require('./path/to/the/scraper.js')
+    const scraper = require('./path/to/scraper')
 
 ==============================
 
 ## Using the package  
 
-    const scraper = require('./scraper.js');
+    const scraper = require('./scraper');
 
     scraper(url).then(resp => {
             console.log(resp)
+        }).catch(err => {
+            console.log(err)
         })
     // prints the ingredients to your screen
 
