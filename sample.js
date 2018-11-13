@@ -11,6 +11,6 @@ const urls = [
 ]
 urls.map(url => {
     scraper(urls).then(resp => {
-    console.log(resp)
+    console.log(url,resp)
     })
 })
