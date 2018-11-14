@@ -22,7 +22,9 @@ urls.map(url => {
     scraper(url).then(resp => {
     // console.log(url, resp)
     // var ingredients = resp.cleaned
-    console.log(resp)
+    resp.cleaned.forEach(elem => {
+        console.log(elem.name)
+    })
     }).catch(err => {
         console.error(err)
     })
