@@ -81,6 +81,7 @@ The module will return a json file with 3 things:
 3) A cleaned/parsed ingredients list  
 
 For example:  
+```
     { recipeName: 'Matcha–Chocolate Chip Cookies',  
     ingredients:  
     [ 'Nonstick olive or coconut oil cooking spray',  
@@ -114,3 +115,4 @@ For example:
         { amount: '1/2', unit: 'Cup', name: 'organic rolled oats' },  
         { amount: '1', unit: 'Cup', name: 'semisweet chocolate chips' },  
         { amount: '1', unit: 'Tablespoon', name: 'matcha powder' } ] }  
+```
