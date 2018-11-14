@@ -6,14 +6,15 @@ module.exports = async function(url, save, filename){
     
     return scraper(url, save, filename).then(resp => {
         var retDict = resp;
-        var cleanedIngredients = [];
+        var cleaned = [];
 
         retDict.ingredients.forEach(element => {
-            var item = ingParser.parse(parser(element))
-            cleanedIngredients.push(item)
+            var segmentedIngredients = ingParser.parse(parser.fix(element))
+            segmentedIngredients.name = parser.beautify(segmentedIngredients.name)
+            cleaned.push(segmentedIngredients)
         });
 
-        retDict['cleaned'] = cleanedIngredients;
+        retDict['cleaned'] = cleaned;
         // console.log(retDict['cleaned'])
 
         return new Promise((resolve, reject) => {
@@ -22,5 +23,4 @@ module.exports = async function(url, save, filename){
     }).catch(err => {
         throw err;
     })
-
 }
