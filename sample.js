@@ -1,18 +1,29 @@
 const scraper = require('./scraper');
-
-const url = "https://cookpad.com/us/recipes/439487-soft-and-chewy-chocolate-chip-cookies"
-const url1 = "https://www.epicurious.com/recipes/food/views/matchachocolate-chip-cookies"
-const url2 = "https://www.foodnetwork.com/recipes/food-network-kitchen/ultimate-vanilla-cake-recipe-2110055"
+const ing = require('ingredientparser');
 
 const urls = [
-    url, // not supported
-    url1, // supported
-    url2 // supported
+    "https://www.foodnetwork.com/recipes/food-network-kitchen/ultimate-vanilla-cake-recipe-2110055",
+    "https://www.epicurious.com/recipes/food/views/matchachocolate-chip-cookies",
+    "https://cookpad.com/us/recipes/439487-soft-and-chewy-chocolate-chip-cookies"
 ]
+
+var sentence = "";
+
+
+
+// var sen = "1 papaya (if making vegan, add 1 to 2 tablespoons of water)";
+// var regex = /to/gi;
+
+// var newSen = clean(sen)
+
+// console.log(newSen, "=> ",ing.parse(newSen))
+
 urls.map(url => {
     scraper(url).then(resp => {
-    console.log(url, resp)
+    // console.log(url, resp)
+    // var ingredients = resp.cleaned
+    console.log(resp)
     }).catch(err => {
-        console.log(err)
+        console.error(err)
     })
 })

@@ -18,8 +18,10 @@
     "fs-extra": "^7.0.1",
     "g-i-s": "^2.1.2",
     "image-downloader": "^3.4.1",
+    "ingredientparser": "0.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "sanitize-html": "^1.19.1"
+    "sanitize-html": "^1.19.1",
+    "wordpos": "^1.2.0"
   }
 }

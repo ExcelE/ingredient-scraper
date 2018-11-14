@@ -12,8 +12,6 @@ module.exports = async function(url, save, filename) {
     return await scraper(url, save, filename);
 };
 
-const url = "https://cincyshopper.com/copycat-chick-fil-a-sandwich/"
-
 function saver(json, name) {
     var jsoned = JSON.stringify(json, null, 4);
     var filename = path.join(process.cwd(), `${name}.json`);
@@ -50,7 +48,7 @@ async function scraper(url, save = false, fileout = Date.now()) {
     
     if (Object.keys(checked).length === 1 && checked.constructor === Object) {
         // console.error(colors.bgRed(checked.site, "is currently not supported!"));
-        return colors.bgRed(`\n${checked.site} is currently not supported!`);
+        throw colors.bgRed(`\n${checked.site} is currently not supported!`);
     }
 
     try {
@@ -86,7 +84,7 @@ async function scraper(url, save = false, fileout = Date.now()) {
         });
 
     } catch (err) {
-        console.error(err);
+        throw err;
     }    
 
 }
