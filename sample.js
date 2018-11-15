@@ -1,5 +1,4 @@
-const scraper = require('./scraper');
-const ing = require('ingredientparser');
+const scraper = require('./index.js');
 
 const urls = [
     "https://www.foodnetwork.com/recipes/food-network-kitchen/ultimate-vanilla-cake-recipe-2110055",
@@ -9,15 +8,6 @@ const urls = [
 ]
 
 var sentence = "";
-
-
-
-// var sen = "1 papaya (if making vegan, add 1 to 2 tablespoons of water)";
-// var regex = /to/gi;
-
-// var newSen = clean(sen)
-
-// console.log(newSen, "=> ",ing.parse(newSen))
 
 urls.map(url => {
     scraper(url).then(resp => {

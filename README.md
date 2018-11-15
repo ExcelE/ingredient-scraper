@@ -1,6 +1,6 @@
 ﻿# ingredient-scraper
 
-Very basic scraper intended for scraping ingredients from recipes. Will save a json file.
+Another ingredient/recipe scraper. 
 
 Supported sites:  
 
