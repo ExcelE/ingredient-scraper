@@ -38,13 +38,13 @@ Supported sites:
 1) Download the ```scraper``` folder and place it somewhere to your projects.  
 2) Install the following dependencies:  
     
-    cheerio
-    request-promise
-    fs
-    colors/safe
-    sanitize-html
-    path
-    ingredientparser
+    cheerio  
+    request-promise  
+    fs  
+    colors/safe  
+    sanitize-html  
+    path  
+    ingredientparser  
 
 3) Import to your project:  
 
