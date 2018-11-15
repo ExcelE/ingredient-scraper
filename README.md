@@ -3,11 +3,22 @@
 Very basic scraper intended for scraping ingredients from recipes. Will save a json file.
 
 Supported sites:  
+
 1) Allrecipes  
 2) FoodNetwork  
 3) Genius Kitchen  
 4) EpiCurious  
 5) CindyShopper  
+6) The Kitchn  
+7) Chowhound  
+8) Simply Recipes  
+9) Cooking Light  
+10) Betty Crocker  
+11) MyRecipes  
+12) Eating Well  
+13) Cooks  
+14) Kraft Recipes  
+
 
 ==============================
 ### Table of Contents:  
