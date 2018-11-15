@@ -25,5 +25,5 @@ async function scraper(url) {
 
 }
 
-const url = "https://www.allrecipes.com/recipe/19145/grandma-minnies-old-fashioned-sugar-cookies/"
+const url = "https://www.allrecipes.com/recipe/268706/cranberry-sweet-potato-casserole/"
 scraper(url)
