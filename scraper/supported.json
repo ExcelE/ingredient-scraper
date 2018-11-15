@@ -23,5 +23,50 @@
         "site": "cincyshopper",
         "title": "h2[class=wprm-recipe-name]",
         "ingredients": ".wprm-recipe-ingredient-name"
+    },
+    {
+        "site": "thekitchn",
+        "title": "h2[itemprop=name]",
+        "ingredients": ".PostRecipeIngredientGroup__ingredients li"
+    },
+    {
+        "site": "chowhound",
+        "title": ".fr_r_info h1",
+        "ingredients": ".freyja_box.freyja_box81 li"
+    },
+    {
+        "site": "simplyrecipes",
+        "title": ".recipe-callout h2",
+        "ingredients": ".entry-details.recipe-ingredients .ingredient"
+    }, 
+    {
+        "site": "cookinglight",
+        "title": ".headline.heading-content",
+        "ingredients": ".ingredients li"
+    }, 
+    {
+        "site": "bettycrocker",
+        "title": ".recipePartTitleText",
+        "ingredients": ".recipePartIngredient"
+    },
+    {
+        "site": "myrecipes",
+        "title": ".headline.heading-content.margin-8-top.margin-16-bottom",
+        "ingredients": ".ingredients"
+    },
+    {
+        "site": "eatingwell",
+        "title": ".recipeDetailHeader.showOnTabletToDesktop",
+        "ingredients": ".multiColumn.listIngredients.clearfix li"
+    },
+    {
+        "site": "cooks",
+        "title": "fn",
+        "ingredients": ".hrecipe .ingredient"
+    },
+    {
+        "site": "kraftrecipes",
+        "title": ".krRDPrecName",
+        "ingredients": ".krRDPIngreListCont div[role=text]"
     }
 ]
