@@ -37,7 +37,7 @@ Supported sites:
 ### Importing the Package to Your Project  
 1) Download the ```scraper``` folder and place it somewhere to your projects.  
 2) Install the following dependencies:  
-    
+      
     cheerio  
     request-promise  
     fs  
@@ -45,6 +45,8 @@ Supported sites:
     sanitize-html  
     path  
     ingredientparser  
+    
+    ```npm install cheerio request-promise fs  colors/safe  sanitize-html  path  ingredientparser```
 
 3) Import to your project:  
 
