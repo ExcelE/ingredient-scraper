@@ -10,6 +10,14 @@ Supported sites:
 5) CindyShopper  
 
 ==============================
+### Table of Contents:  
+1) [Setting up environment](#Setting-up-environment)
+2) [Using the package](#Using-the-package)
+3) [Package Options](#Options)
+4) [Package Output and Return Example](#More-Details-about-Return)
+
+==============================
+
 
 ## Setting up environment
 1) Install packages and dependencies   
