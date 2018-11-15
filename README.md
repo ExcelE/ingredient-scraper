@@ -31,10 +31,16 @@ Supported sites:
 
 
 ## Setting up environment
-1) Install packages and dependencies   
-> ```node install```  
 
 ### Importing the Package to Your Project  
+
+#### You Have 2 Options:
+
+RECOMMENDED: ```npm install ingredient-scraper```
+
+
+OR from source:
+
 1) Download the ```scraper``` folder and place it somewhere to your projects.  
 2) Install the following dependencies:  
       
