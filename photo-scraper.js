@@ -74,21 +74,25 @@ async function search (query, dirName) {
 			continue
 		}
 		// Per car
-		for(let i = 0; i < modelArray.length; i++) {
-			key = modelArray[i];
-			await delay(REQUEST_DELAY_IN_MS);
+		// for(let i = 0; i < modelArray.length; i++) {
+		// 	key = modelArray[i];
 		// }
-		// modelArray.forEach(function (key) {
-			bing.list({ keyword: key, num: MAXIMUM_IMAGES_PER_MODEL, detail: true })
+		modelArray.forEach(async function (key) {
+			await delay(REQUEST_DELAY_IN_MS);
+			bing.list({ 
+				keyword: key, 
+				num: MAXIMUM_IMAGES_PER_MODEL, 
+				detail: true,
+			})
 			.then(res => {
 				delay(REQUEST_DELAY_IN_MS);
-				if (res.length === 0) return console.log(currTime(), 'No results for', key)
+				if (res.length === 0) return console.log(currTime(), 'No results for', key, "=>", `/cars/${dirName}`)
 				for (const i of res) {
 					delay(500);
 					if (i.format !== 'jpeg') continue
 					imageDownloader({
 						url: i.url,
-						dest: __dirname + `/cars/${dirName}/${pathCleaner(key)}`,
+						dest: __dirname + `/cars/${dirName}`,
 						headers: {
 							// Some sites will refuse to service requests without appropriate headers
 							'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
@@ -98,6 +102,6 @@ async function search (query, dirName) {
 			})
 			.catch(console.log)
 		}
-		// )
+		)
 	}
 }
