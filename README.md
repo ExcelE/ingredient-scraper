@@ -56,13 +56,13 @@ OR from source:
 
 3) Import to your project:  
 
-    const scraper = require('./path/to/scraper')
+    const scraper = require('ingredient-scraper')
 
 ==============================
 
 ## Using the package  
 
-    const scraper = require('./scraper');
+    const scraper = require('ingredient-scraper');
 
     scraper(url).then(resp => {
     resp.cleaned.forEach(elem => {
@@ -82,7 +82,7 @@ OR from source:
 ```filename```: *optional*, custom filename for scraped json.  
 
 ### More Examples:
-    const scraper = require('./scraper.js');
+    const scraper = require('ingredient-scraper');
 
     scraper(url, true).then(resp => {
             console.log(resp)
@@ -92,7 +92,7 @@ OR from source:
 
 Example:
 
-    const scraper = require('./scraper.js');
+    const scraper = require('ingredient-scraper');
 
     scraper(url, true, "Caserole-recipe.json").then(resp => {
             console.log(resp)
