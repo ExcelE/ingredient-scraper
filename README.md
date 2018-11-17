@@ -103,10 +103,11 @@ Example:
 
 ## More Details about Return:
 
-The module will return a json file with 3 things:  
+The module will return a json file with 4 things:  
 1) ```recipeName``` The name of the recipe
 2) ```ingredients``` An array of the ingredients list  
 3) ```cleaned``` A cleaned/parsed ingredients list  
+4) ```directions``` Instruction set for the recipe
 
 For example:  
 ```
