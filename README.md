@@ -56,7 +56,7 @@ OR from source:
 
 3) Import to your project:  
 
-    const scraper = require('./path/to/scraper')
+    const scraper = require('ingredient-scraper')
 
 ==============================
 
