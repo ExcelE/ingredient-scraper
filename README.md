@@ -36,8 +36,9 @@ Supported sites:
 
 #### You Have 2 Options:
 
-RECOMMENDED: ```npm install ingredient-scraper```
+RECOMMENDED:   
 
+```npm install ingredient-scraper```
 
 OR from source:
 
