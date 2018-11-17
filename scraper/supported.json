@@ -1,72 +1,88 @@
 [
     {
         "site": "allrecipes",
-        "title": "h1[itemprop=name]",
-        "ingredients": ".recipe-ingred_txt.added"
+        "title": ".headline.heading-content.margin-8-top.margin-16-bottom",
+        "ingredients": ".ingredients-section .checkbox-list",
+        "directions": ".instructions-section .section-body p"
     },
     {
         "site": "foodnetwork",
         "title": ".o-AssetTitle__a-HeadlineText",
-        "ingredients": ".o-Ingredients__a-Ingredient"
+        "ingredients": ".o-Ingredients__a-Ingredient",
+        "directions": ".o-Method__m-Body li"
     },
     {
         "site": "geniuskitchen",
         "title": "h1",
-        "ingredients": ".food"
+        "ingredients": ".food", 
+        "directions": ".directions-inner.container-xs li"
     },
     {
         "site": "epicurious",
         "title": "h1",
-        "ingredients": ".ingredient"
+        "ingredients": ".ingredient", 
+        "directions": "li[class=preparation-step]"
     },
     {
         "site": "cincyshopper",
         "title": "h2[class=wprm-recipe-name]",
-        "ingredients": ".wprm-recipe-ingredient-name"
+        "ingredients": ".wprm-recipe-ingredient-name", 
+        "directions": ".wprm-recipe-instruction-text"
     },
     {
         "site": "thekitchn",
         "title": "h2[itemprop=name]",
-        "ingredients": ".PostRecipeIngredientGroup__ingredients li"
+        "ingredients": ".PostRecipeIngredientGroup__ingredients li", 
+        "directions": ".PostRecipeInstructionGroup__step"
     },
     {
         "site": "chowhound",
         "title": ".fr_r_info h1",
-        "ingredients": ".freyja_box.freyja_box81 li"
+        "ingredients": ".freyja_box.freyja_box81 li", 
+        "directions": ".frr_wrap ol li",
+        "ignoreNested": "span"
     },
     {
         "site": "simplyrecipes",
         "title": ".recipe-callout h2",
-        "ingredients": ".entry-details.recipe-ingredients .ingredient"
+        "ingredients": ".entry-details.recipe-ingredients .ingredient", 
+        "directions": "#sr-recipe-method p",
+        "ignoreNested": "strong"
     }, 
     {
         "site": "cookinglight",
         "title": ".headline.heading-content",
-        "ingredients": ".ingredients li"
+        "ingredients": ".ingredients li", 
+        "directions": ".step p" 
     }, 
     {
         "site": "bettycrocker",
         "title": ".recipePartTitleText",
-        "ingredients": ".recipePartIngredient"
+        "ingredients": ".recipePartIngredient", 
+        "directions": ".recipePartStepDescription"
     },
     {
         "site": "myrecipes",
         "title": ".headline.heading-content.margin-8-top.margin-16-bottom",
-        "ingredients": ".ingredients"
+        "ingredients": ".ingredients li", 
+        "directions": ".step p"
     },
     {
         "site": "eatingwell",
         "title": ".recipeDetailHeader.showOnTabletToDesktop",
-        "ingredients": ".multiColumn.listIngredients.clearfix li"
+        "ingredients": ".multiColumn.listIngredients.clearfix li", 
+        "directions": ".recipeDirectionsListItem"
     },
     {
         "site": "cooks",
         "title": "fn",
-        "ingredients": ".hrecipe .ingredient"
+        "ingredients": ".hrecipe .ingredient", 
+        "directions": ".instructions"
     },
     {
         "site": "kraftrecipes",
         "title": ".krRDPrecName",
-        "ingredients": ".krRDPIngreListCont div[role=text]"
+        "ingredients": ".krRDPIngreListCont div[role=text]", 
+        "directions": ".krRecipeMakeItText"
     }
 ]

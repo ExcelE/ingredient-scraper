@@ -4,6 +4,8 @@ const ingParser = require('ingredientparser')
 
 module.exports = async function(url, save, filename){
     
+    if(!url) throw { error: "No URL in the request." }
+
     return scraper(url, save, filename).then(resp => {
         var retDict = resp;
         var cleaned = [];

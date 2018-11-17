@@ -20,11 +20,27 @@ function saver(json, name) {
     });
 }
 
-function sanitizer(dirty) {
-    var clean = sanitize(dirty, {
+function sanitizer(dirty, tagTarget) {
+    // if(tag) {
+        var clean = sanitize(dirty, {
+        transformTags: {
+            tagTarget: (tagName, attribs) => {
+                return {
+                    tagName: tagTarget,
+                    text: "b",
+                }
+            }
+        },
         allowedTags: [],
         allowedAttributes: [],
     });
+    // }
+    // else {
+    //     var clean = sanitize(dirty, {
+    //         allowedTags: [],
+    //         allowedAttributes: [],
+    //     });
+    // }
     return clean.trim();
 }
 
@@ -56,6 +72,7 @@ async function scraper(url, save = false, fileout = Date.now()) {
         var recipe = {
             recipeName: "",
             ingredients: [],
+            directions: []
         }
 
         // Scrape
@@ -75,6 +92,25 @@ async function scraper(url, save = false, fileout = Date.now()) {
                 recipe.ingredients.push(sanitizer($(this)));
             }
         });
+
+        // Some DOM Manipulation
+        $.fn.ignore = function(sel){
+            return this.clone().find(sel||">*").remove().end();
+          };
+
+        // store into directions array
+        $(checked.directions).each(function(i, elem, arr) {
+            if (checked.ignoreNested) {
+                recipe.directions.push(sanitizer($(this)
+                    .clone()    //clone the element
+                    .children(checked.ignoreNested) //select all the children
+                    .remove()   //remove all the children
+                    .end()  //again go back to selected element
+                    .text()));
+            }
+            else recipe.directions.push(sanitizer($(this)));
+        });
+
         var name = recipe.recipeName.split(' ').slice(0,2).join('-');
         var timestamp = fileout.toString().slice(-5,-1);
 
