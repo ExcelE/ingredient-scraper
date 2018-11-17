@@ -22,10 +22,10 @@ Supported sites:
 
 ==============================
 ### Table of Contents:  
-1) [Setting up environment](#Setting-up-environment)
-2) [Using the package](#Using-the-package)
-3) [Package Options](#Options)
-4) [Package Output and Return Example](#More-Details-about-Return)
+1) [Setting up environment](#setting-up-environment)
+2) [Using the package](#using-the-package)
+3) [Package Options](#options)
+4) [Package Output and Return Example](#more-details-about-return)
 
 ==============================
 
@@ -62,7 +62,7 @@ OR from source:
 
 ## Using the package  
 
-    const scraper = require('./scraper');
+    const scraper = require('ingredient-scraper');
 
     scraper(url).then(resp => {
     resp.cleaned.forEach(elem => {
@@ -82,7 +82,7 @@ OR from source:
 ```filename```: *optional*, custom filename for scraped json.  
 
 ### More Examples:
-    const scraper = require('./scraper.js');
+    const scraper = require('ingredient-scraper');
 
     scraper(url, true).then(resp => {
             console.log(resp)
@@ -92,7 +92,7 @@ OR from source:
 
 Example:
 
-    const scraper = require('./scraper.js');
+    const scraper = require('ingredient-scraper');
 
     scraper(url, true, "Caserole-recipe.json").then(resp => {
             console.log(resp)
@@ -103,15 +103,17 @@ Example:
 ## More Details about Return:
 
 The module will return a json file with 3 things:  
-1) The name of the recipe
-2) An array of the ingredients list  
-3) A cleaned/parsed ingredients list  
+1) ```recipeName``` The name of the recipe
+2) ```ingredients``` An array of the ingredients list  
+3) ```cleaned``` A cleaned/parsed ingredients list  
 
 For example:  
 ```
-    { recipeName: 'Matcha–Chocolate Chip Cookies',  
-    ingredients:  
-    [ 'Nonstick olive or coconut oil cooking spray',  
+    { 
+    recipeName: 
+        'Matcha–Chocolate Chip Cookies',  
+    ingredients:  [ 
+        'Nonstick olive or coconut oil cooking spray',  
         '3/4 cup gluten-free flour',  
         '1/2 teaspoon aluminum-free baking powder',  
         '1/4 teaspoon sea salt',  
@@ -122,10 +124,11 @@ For example:
         '1 1/2 ripe medium bananas, mashed',  
         '1/2 cup organic rolled oats',  
         '1 cup semisweet chocolate chips',  
-        '1 tablespoon matcha powder, sifted' ],  
-    cleaned:  
-    [ { name: 'Nonstick olive or coconut oil cooking spray' },  
-    { amount: '3/4', unit: 'Cup', name: 'gluten-free flour' },  
+        '1 tablespoon matcha powder, sifted' 
+        ],  
+    cleaned:  [
+        { name: 'Nonstick olive or coconut oil cooking spray' },  
+        { amount: '3/4', unit: 'Cup', name: 'gluten-free flour' },  
         { amount: '1/2',  
         unit: 'Teaspoon',  
         name: 'aluminum-free baking powder' },  
@@ -141,5 +144,7 @@ For example:
         { amount: '1 1/2', name: 'ripe medium bananas' },  
         { amount: '1/2', unit: 'Cup', name: 'organic rolled oats' },  
         { amount: '1', unit: 'Cup', name: 'semisweet chocolate chips' },  
-        { amount: '1', unit: 'Tablespoon', name: 'matcha powder' } ] }  
+        { amount: '1', unit: 'Tablespoon', name: 'matcha powder' } 
+        ] 
+    }  
 ```

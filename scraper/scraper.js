@@ -48,7 +48,8 @@ async function scraper(url, save = false, fileout = Date.now()) {
     
     if (Object.keys(checked).length === 1 && checked.constructor === Object) {
         // console.error(colors.bgRed(checked.site, "is currently not supported!"));
-        throw colors.bgRed(`\n${checked.site} is currently not supported!`);
+        console.error(colors.bgRed(`\n${checked.site} is currently not supported!`));
+        throw { error: `\n${checked.site} is currently not supported!` };
     }
 
     try {
