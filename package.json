@@ -1,6 +1,6 @@
 {
   "name": "ingredient-scraper",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Another ingredient/recipe scraper.",
   "main": "index.js",
   "scripts": {
