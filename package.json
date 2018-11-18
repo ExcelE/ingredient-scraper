@@ -13,7 +13,8 @@
     "ingredient-scraper",
     "ingredient"
   ],
-  "author": "",
+  "author": "Excel Espina",
+  "homepage": "https://github.com/ExcelE/ingredient-scraper#readme",
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
