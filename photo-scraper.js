@@ -9,9 +9,9 @@ const cars = JSON.parse(rawData);
 const datetime = require('node-datetime');
 const colors = require('colors/safe')
 
-const MAXIMUM_BRANDS = 10
-const MAXIMUM_IMAGES_PER_MODEL = 100
-const REQUEST_DELAY_IN_MS = 100
+const MAXIMUM_BRANDS = 100
+const MAXIMUM_IMAGES_PER_MODEL = 1000
+const REQUEST_DELAY_IN_MS = 2000
 
 function testImage() {
 	imageDownloader({
@@ -26,13 +26,13 @@ function testImage() {
 
 ;(async() => {
 	for (let i = 0; i < MAXIMUM_BRANDS; i++) {
-		const carArray = cars.brands[i];
-		const searchTitle = Object.keys(carArray).toString();
-		const currCar = searchTitle.replace(/\s+/g, '-').toLowerCase()
-		await delay(500);
-		// console.log(carArray[searchTitle][0], " => ", pathCleaner(carArray[searchTitle][0]))
-		// testImage();
-		search(carArray, currCar)
+		await delay(REQUEST_DELAY_IN_MS);
+		cars.brands.forEach(async (brands) => {
+			const dirName = pathCleaner(brands);
+			search(brands, dirName)
+		});
+		// const currSelection = cars.brands[i];
+		// 
 	}
 }) ();
 
@@ -64,44 +64,28 @@ function pathCleaner(folderName) {
 }
 
 async function search (query, dirName) {
-	// var key = query;
-	var keywords = query;
-	// Per brand
-	for (var feature in keywords) {
-		modelArray = keywords[feature];
-		if (!Array.isArray(modelArray)) {
-			 console.log(currTime(), 'Array not found for', feature)
-			continue
-		}
-		// Per car
-		// for(let i = 0; i < modelArray.length; i++) {
-		// 	key = modelArray[i];
-		// }
-		modelArray.forEach(async function (key) {
-			await delay(REQUEST_DELAY_IN_MS);
-			bing.list({ 
-				keyword: key, 
-				num: MAXIMUM_IMAGES_PER_MODEL, 
-				detail: true,
-			})
-			.then(res => {
-				delay(REQUEST_DELAY_IN_MS);
-				if (res.length === 0) return console.log(currTime(), 'No results for', key, "=>", `/cars/${dirName}`)
-				for (const i of res) {
-					delay(500);
-					if (i.format !== 'jpeg') continue
-					imageDownloader({
-						url: i.url,
-						dest: __dirname + `/cars/${dirName}`,
-						headers: {
-							// Some sites will refuse to service requests without appropriate headers
-							'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
-						}
-					})
+	await delay(REQUEST_DELAY_IN_MS);
+	bing.list({ 
+		keyword: query, 
+		num: MAXIMUM_IMAGES_PER_MODEL, 
+		detail: true,
+	})
+	.then(async (res) => {
+		await delay(REQUEST_DELAY_IN_MS);
+		if (res.length === 0) return console.log(currTime(), 'No results for', query, "=>", `/cars/${dirName}`)
+		for (const i of res) {
+			delay(500);
+			if (i.format !== 'jpeg') continue
+			imageDownloader({
+				url: i.url,
+				dest: __dirname + `/cars/${dirName}`,
+				headers: {
+					// Some sites will refuse to service requests without appropriate headers
+					'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
 				}
 			})
-			.catch(console.log)
 		}
-		)
-	}
+	})
+	.catch(console.log)
+
 }
