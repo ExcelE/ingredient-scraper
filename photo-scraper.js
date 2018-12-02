@@ -25,15 +25,26 @@ function testImage() {
 }
 
 ;(async() => {
-	for (let i = 0; i < MAXIMUM_BRANDS; i++) {
+	// for (let i = 0; i < MAXIMUM_BRANDS; i++) {
 		await delay(REQUEST_DELAY_IN_MS);
-		cars.brands.forEach(async (brands) => {
-			const dirName = pathCleaner(brands);
-			search(brands, dirName)
-		});
-		// const currSelection = cars.brands[i];
-		// 
-	}
+		for (var key in cars.brands) {
+			for(var name in cars.brands[key])
+				cars.brands[key][name].forEach((model) => {
+					const dirName = pathCleaner(model);
+					search(model, name)
+				})
+			//   cars.brands[key].forEach(async (model) => {
+			// 	await delay(REQUEST_DELAY_IN_MS);
+			// 	const dirName = pathCleaner(model);
+			// 	console.log(dirName)
+			//   })
+		}
+		// cars.brands.forEach(async (brands) => {
+		// 	const dirName = pathCleaner(brands);
+		// 	console.log(dirName)
+		// 	// search(brands, dirName)
+		// });
+	// }
 }) ();
 
 async function imageDownloader(image) {
@@ -63,15 +74,14 @@ function pathCleaner(folderName) {
 	}
 }
 
-async function search (query, dirName) {
-	await delay(REQUEST_DELAY_IN_MS);
+function search (query, dirName) {
+	// await delay(REQUEST_DELAY_IN_MS);
 	bing.list({ 
 		keyword: query, 
 		num: MAXIMUM_IMAGES_PER_MODEL, 
 		detail: true,
 	})
-	.then(async (res) => {
-		await delay(REQUEST_DELAY_IN_MS);
+	.then((res) => {
 		if (res.length === 0) return console.log(currTime(), 'No results for', query, "=>", `/cars/${dirName}`)
 		for (const i of res) {
 			delay(500);
